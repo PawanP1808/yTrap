@@ -47,6 +47,7 @@ struct Constants {
         
         // example: static let Category = "category"
         static let loginBtnTxt = "Login With Spotify"
+        static let kCloseSafariViewControllerNotification = "kCloseSafariViewControllerNotification"
 
     }
 
@@ -54,6 +55,11 @@ struct Constants {
         
         struct Spotify {
             static let loginUrl = URL(string:"https://accounts.spotify.com/authorize?nolinks=true&nosignup=true&response_type=code&scope=streaming%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-recently-played%20user-read-private&redirect_uri=socialmusic%3A%2F%2Freturnafterlogin&show_dialog=true&client_id=26065fe72a3c41e08f86d6f50e3c2204")
+            static let baseSpotifyUrl = "https://accounts.spotify.com/api/token"
+            static let callbackURL = "socialmusic://returnafterlogin"
+            static let clientId = "26065fe72a3c41e08f86d6f50e3c2204"
+            static let clientSecret = "7297eb1780f94f598a127e361482dbcc"
+            
         }
         
         // example: static let twitterApiUrl = "https://api.twitter.com/"

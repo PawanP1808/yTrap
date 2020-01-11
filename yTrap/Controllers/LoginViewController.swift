@@ -12,10 +12,7 @@ import SafariServices
 class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     
     private var safariVC: SFSafariViewController?
-    private let kCloseSafariViewControllerNotification = "kCloseSafariViewControllerNotification"
-    
-    
-    
+
     lazy var loginButton:UIButton = {
         let button = UIButton() 
         button.backgroundColor = Constants.Design.Color.Spotify.Green
@@ -49,25 +46,38 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     
     @objc private func updateAfterFirstLogin (notification: NSNotification) {
         self.safariVC?.dismiss(animated: true, completion: nil)
-        if let authCode = notification.userInfo?["auth_code"] as? String {
+        if let userInfo = notification.userInfo as? [String:String],
+            let authCode = userInfo["auth_code"] {
         //self.loginButton(hide: true)
-           // self.gatekeeper?.getAuthCode(authCode) { accessToken in
-            //            self.user.accessToken = accessToken
-            //            self.getUserDataTransition(accessToken: accessToken)
-            //        }
+            AuthAPI().getAuthCode(authToken: authCode) { accessToken,refreshToken,expireTime in
+                AuthDataStore().storeAccessInfo(accessToken: accessToken, refreshToken: refreshToken, expireHour: expireTime)
+                self.getUserInfo(token: accessToken)
+                    }
+        }
+    }
+    
+    func getUserInfo(token:String){
+        
+        SpotifyAPI().getUserData(authToken: token){ success,userData in
+            guard  success else { return }
+            
+            let user = User(withData: userData!)
+            
+            AuthDataStore().storeUserData(forUser: user, userName:user.userName)
+//
+//            let a = AuthDataStore().getUserData(userName: user.userName)
+
+//            self.gatekeeper?.newUser(userName: user.username, image: user.imageUrl){ success in
+//                guard success else { return }
+//            }
+//            self.performSegueToRooms()
         }
     }
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.updateAfterFirstLogin), name: NSNotification.Name(rawValue: kCloseSafariViewControllerNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.updateAfterFirstLogin), name: NSNotification.Name(rawValue: Constants.Content.kCloseSafariViewControllerNotification), object: nil)
         setupView()
-        
-    
-        
-       
     }
     
     func setupView() {

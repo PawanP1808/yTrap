@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print(URLContexts.first?.url)
+//        print(URLContexts.first?.url)
         guard let uwURL = URLContexts.first?.url  else {
             return
         }
@@ -34,12 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let codeFromURL = stringURL.components(separatedBy: "code=")
                 guard let uriFromUrl = codeFromURL.first?.components(separatedBy: "returnafterlogin/?"), let uri = uriFromUrl.first else { return }
                 if  uri == "socialmusic://" {
-                    let userDefaults = UserDefaults.standard
-                    userDefaults.set(codeFromURL[1], forKey: "FirstCode")
-                    userDefaults.synchronize()
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "kCloseSafariViewControllerNotification"), object: uwURL,userInfo: ["auth_Code":codeFromURL[1]] )
-//                    return true
-
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.Content.kCloseSafariViewControllerNotification), object: uwURL,userInfo: ["auth_code":codeFromURL[1]] )
                 }
         
     }
