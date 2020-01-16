@@ -47,7 +47,4 @@ class ImageCache {
             callback(false,nil)
         }
     }
-
-    
-    
 }

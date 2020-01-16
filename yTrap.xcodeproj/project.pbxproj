@@ -22,9 +22,21 @@
 		874CBD3D23C91A66002A5D73 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874CBD3A23C91A65002A5D73 /* SpotifyAudioPlayback.framework */; };
 		874CBD3E23C91A66002A5D73 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874CBD3B23C91A66002A5D73 /* SpotifyAuthentication.framework */; };
 		874CBD3F23C91A66002A5D73 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874CBD3C23C91A66002A5D73 /* SpotifyMetadata.framework */; };
+		874D676223CBB06800A7CFE4 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D676123CBB06800A7CFE4 /* VoteViewController.swift */; };
+		874D676423CBB31D00A7CFE4 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D676323CBB31D00A7CFE4 /* PlayerViewController.swift */; };
+		874D676623CBC1C900A7CFE4 /* VoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D676523CBC1C900A7CFE4 /* VoteTableViewCell.swift */; };
+		874D676823CBCC7A00A7CFE4 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D676723CBCC7A00A7CFE4 /* Song.swift */; };
 		8756420B23CA7084003551B0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756420A23CA7084003551B0 /* ImageCache.swift */; };
-		8756420E23CA7965003551B0 /* GeneralCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756420D23CA7965003551B0 /* GeneralCache.swift */; };
 		8756421023CA7FC1003551B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756420F23CA7FC1003551B0 /* User.swift */; };
+		8756421223CA8EDE003551B0 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756421123CA8EDE003551B0 /* RoomViewController.swift */; };
+		8756421623CA9872003551B0 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756421523CA9872003551B0 /* Room.swift */; };
+		8756421823CAB2AA003551B0 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756421723CAB2AA003551B0 /* RoomTableViewCell.swift */; };
+		8757305F23CCEBBD0021387E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8757305E23CCEBBD0021387E /* GoogleService-Info.plist */; };
+		87B4188323CBE67E00CB3640 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B4188223CBE67E00CB3640 /* PlaylistViewController.swift */; };
+		87B4188523CBE90900CB3640 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B4188423CBE90900CB3640 /* Playlist.swift */; };
+		87B4188723CBF38100CB3640 /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B4188623CBF38100CB3640 /* DefaultTableViewCell.swift */; };
+		87B4188923CBF3D000CB3640 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B4188823CBF3D000CB3640 /* PlaylistTableViewCell.swift */; };
+		87B4188B23CBF3F600CB3640 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B4188A23CBF3F600CB3640 /* SongTableViewCell.swift */; };
 		A9AB629CFE28A79278055BB9 /* Pods_yTrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080946D6BDDB8D1DE56E6D5D /* Pods_yTrap.framework */; };
 		E1994E47E12D8DAA180C8FC3 /* Pods_yTrap_yTrapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D090A370193F3EB861EAA4 /* Pods_yTrap_yTrapUITests.framework */; };
 /* End PBXBuildFile section */
@@ -74,9 +86,21 @@
 		874CBD3B23C91A66002A5D73 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		874CBD3C23C91A66002A5D73 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		874CBD4023C91B75002A5D73 /* yTrap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yTrap-Bridging-Header.h"; sourceTree = "<group>"; };
+		874D676123CBB06800A7CFE4 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		874D676323CBB31D00A7CFE4 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		874D676523CBC1C900A7CFE4 /* VoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteTableViewCell.swift; sourceTree = "<group>"; };
+		874D676723CBCC7A00A7CFE4 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		8756420A23CA7084003551B0 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
-		8756420D23CA7965003551B0 /* GeneralCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCache.swift; sourceTree = "<group>"; };
 		8756420F23CA7FC1003551B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8756421123CA8EDE003551B0 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		8756421523CA9872003551B0 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		8756421723CAB2AA003551B0 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
+		8757305E23CCEBBD0021387E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		87B4188223CBE67E00CB3640 /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
+		87B4188423CBE90900CB3640 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		87B4188623CBF38100CB3640 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
+		87B4188823CBF3D000CB3640 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
+		87B4188A23CBF3F600CB3640 /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		8CD7ABBB7B372E664E87CAAD /* Pods-yTrap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yTrap.debug.xcconfig"; path = "Target Support Files/Pods-yTrap/Pods-yTrap.debug.xcconfig"; sourceTree = "<group>"; };
 		C83BB74D94D9B45B22942C39 /* Pods-yTrapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yTrapTests.debug.xcconfig"; path = "Target Support Files/Pods-yTrapTests/Pods-yTrapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DDDE3F72A8D6718F5ECBF1FE /* Pods-yTrap-yTrapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yTrap-yTrapUITests.release.xcconfig"; path = "Target Support Files/Pods-yTrap-yTrapUITests/Pods-yTrap-yTrapUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				8748F60723C78FB100A4A7A1 /* yTrap */,
-				8748F61E23C78FB200A4A7A1 /* yTrapTests */,
 				8748F62923C78FB200A4A7A1 /* yTrapUITests */,
 				8748F60623C78FB100A4A7A1 /* Products */,
 				1BEBD5D44FF9A71C1D00A78A /* Pods */,
@@ -172,9 +195,11 @@
 				8748F63823C7908F00A4A7A1 /* Controllers */,
 				8748F60823C78FB100A4A7A1 /* AppDelegate.swift */,
 				8748F60A23C78FB100A4A7A1 /* SceneDelegate.swift */,
+				8748F61E23C78FB200A4A7A1 /* yTrapTests */,
 				8748F61123C78FB200A4A7A1 /* Assets.xcassets */,
 				8748F61323C78FB200A4A7A1 /* LaunchScreen.storyboard */,
 				8748F61623C78FB200A4A7A1 /* Info.plist */,
+				8757305E23CCEBBD0021387E /* GoogleService-Info.plist */,
 				874CBD4023C91B75002A5D73 /* yTrap-Bridging-Header.h */,
 			);
 			path = yTrap;
@@ -202,6 +227,10 @@
 			isa = PBXGroup;
 			children = (
 				8748F63C23C790EC00A4A7A1 /* LoginViewController.swift */,
+				8756421123CA8EDE003551B0 /* RoomViewController.swift */,
+				874D676123CBB06800A7CFE4 /* VoteViewController.swift */,
+				874D676323CBB31D00A7CFE4 /* PlayerViewController.swift */,
+				87B4188223CBE67E00CB3640 /* PlaylistViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -209,6 +238,7 @@
 		8748F63923C7909900A4A7A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8751542523D105DF0084985A /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,15 +265,29 @@
 			children = (
 				874CBD3623C9120A002A5D73 /* AuthDataStore.swift */,
 				8756420A23CA7084003551B0 /* ImageCache.swift */,
-				8756420D23CA7965003551B0 /* GeneralCache.swift */,
 			);
 			path = DataStore;
+			sourceTree = "<group>";
+		};
+		8751542523D105DF0084985A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8756421723CAB2AA003551B0 /* RoomTableViewCell.swift */,
+				874D676523CBC1C900A7CFE4 /* VoteTableViewCell.swift */,
+				87B4188623CBF38100CB3640 /* DefaultTableViewCell.swift */,
+				87B4188823CBF3D000CB3640 /* PlaylistTableViewCell.swift */,
+				87B4188A23CBF3F600CB3640 /* SongTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8756420923CA6D9E003551B0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				8756420F23CA7FC1003551B0 /* User.swift */,
+				8756421523CA9872003551B0 /* Room.swift */,
+				874D676723CBCC7A00A7CFE4 /* Song.swift */,
+				87B4188423CBE90900CB3640 /* Playlist.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -359,6 +403,7 @@
 			files = (
 				8748F61523C78FB200A4A7A1 /* LaunchScreen.storyboard in Resources */,
 				8748F61223C78FB200A4A7A1 /* Assets.xcassets in Resources */,
+				8757305F23CCEBBD0021387E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,15 +531,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				874D676823CBCC7A00A7CFE4 /* Song.swift in Sources */,
 				8748F63D23C790EC00A4A7A1 /* LoginViewController.swift in Sources */,
+				87B4188923CBF3D000CB3640 /* PlaylistTableViewCell.swift in Sources */,
+				874D676423CBB31D00A7CFE4 /* PlayerViewController.swift in Sources */,
 				874CBD3723C9120A002A5D73 /* AuthDataStore.swift in Sources */,
 				8756420B23CA7084003551B0 /* ImageCache.swift in Sources */,
-				8756420E23CA7965003551B0 /* GeneralCache.swift in Sources */,
 				874CBD3423C90727002A5D73 /* AuthAPI.swift in Sources */,
+				8756421623CA9872003551B0 /* Room.swift in Sources */,
 				874CBD3923C91940002A5D73 /* SpotifyAPI.swift in Sources */,
+				87B4188B23CBF3F600CB3640 /* SongTableViewCell.swift in Sources */,
+				8756421223CA8EDE003551B0 /* RoomViewController.swift in Sources */,
 				8748F60923C78FB100A4A7A1 /* AppDelegate.swift in Sources */,
 				8748F60B23C78FB100A4A7A1 /* SceneDelegate.swift in Sources */,
 				8756421023CA7FC1003551B0 /* User.swift in Sources */,
+				874D676223CBB06800A7CFE4 /* VoteViewController.swift in Sources */,
+				87B4188323CBE67E00CB3640 /* PlaylistViewController.swift in Sources */,
+				87B4188723CBF38100CB3640 /* DefaultTableViewCell.swift in Sources */,
+				87B4188523CBE90900CB3640 /* Playlist.swift in Sources */,
+				874D676623CBC1C900A7CFE4 /* VoteTableViewCell.swift in Sources */,
+				8756421823CAB2AA003551B0 /* RoomTableViewCell.swift in Sources */,
 				874B59B123C7B8A700A48A90 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -660,8 +716,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8CD7ABBB7B372E664E87CAAD /* Pods-yTrap.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F6SKNC2M64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -691,8 +748,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C39C6B3621A7208EB0A9B22 /* Pods-yTrap.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F6SKNC2M64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
