@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     
     private var safariVC: SFSafariViewController?
     
-    lazy var loginButton:UIButton = {
+    private lazy var loginButton:UIButton = {
         let button = UIButton() 
         button.backgroundColor = Constants.Design.Color.Spotify.Green
         button.setTitle(Constants.Content.loginBtnTxt, for: .normal)
@@ -26,7 +26,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
         return button
     }()
     
-    lazy var logoImageView: UIImageView = {
+    private lazy var logoImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = Constants.Design.Image.logo
@@ -42,7 +42,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
         self.present(safariViewController, animated: true, completion: nil)
     }
     
-    @objc private func updateAfterFirstLogin (notification: NSNotification) {
+    @objc private func login (notification: NSNotification) {
         self.safariVC?.dismiss(animated: true, completion: nil)
         if let userInfo = notification.userInfo as? [String:String],
             let authCode = userInfo["auth_code"] {
@@ -53,17 +53,17 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
         }
     }
     
-    func getUserInfo(token:String){
+    private func getUserInfo(token:String){
         SpotifyAPI().getUserData(authToken: token){ success,userData in
             guard  success else { return }
             let user = User(withData: userData!)
             AuthDataStore().storeUserData(forUser: user)
-            self.transitionToRoom()
+            self.transitionToRooms()
             //TODO: ADD USER TO FIREBASE FOR STATS
         }
     }
     
-    func transitionToRoom(){
+    private func transitionToRooms(){
         let roomViewController = RoomViewController()
         let navigationController = UINavigationController(rootViewController: roomViewController)
         navigationController.navigationBar.prefersLargeTitles = true
@@ -75,15 +75,15 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.updateAfterFirstLogin), name: NSNotification.Name(rawValue: Constants.Content.kCloseSafariViewControllerNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.login), name: NSNotification.Name(rawValue: Constants.Content.kCloseSafariViewControllerNotification), object: nil)
         setupView()
         let userData = AuthDataStore().getUserData()
         if userData != nil {
-            self.transitionToRoom()
+            self.transitionToRooms()
         }
     }
     
-    func setupView() {
+    private func setupView() {
         view.backgroundColor = Constants.Design.Color.Primary.white
         view.addSubview(loginButton)
         view.addSubview(logoImageView)

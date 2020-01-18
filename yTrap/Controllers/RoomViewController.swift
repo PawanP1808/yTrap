@@ -8,21 +8,17 @@
 
 import Foundation
 import Firebase
-class RoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class RoomViewController: UIViewController  {
+    
+    let ref = Database.database().reference(withPath: "Rooms")
     
     private var rooms = [Room]()
     private var user: User?
-    let ref = Database.database().reference(withPath: "Rooms")
+    var tableViewDelegate: RoomTableViewDelegate?
     
-    private lazy var myTableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .plain)
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.delegate = self
-        tv.dataSource = self
-        tv.backgroundColor = Constants.Design.Color.Primary.main
-        tv.tableFooterView = UIView(frame: .zero)
-        tv.register(RoomTableViewCell.self, forCellReuseIdentifier: Constants.Content.roomCellIdentifier)
-        return tv
+    private lazy var roomsTableView: TableView = {
+        return TableView(registerCells: [Register(cellClass: RoomTableViewCell.self,identifier: Constants.Content.roomCellIdentifier )])
     }()
     
     private lazy var profileImageView:UIImageView = {
@@ -38,6 +34,11 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.user = AuthDataStore().getUserData()
+        self.tableViewDelegate = RoomTableViewDelegate(withRooms: [Room]())
+        self.tableViewDelegate?.didSelectRow = didSelectRow(_:)
+        self.roomsTableView.delegate = self.tableViewDelegate
+        self.roomsTableView.dataSource = self.tableViewDelegate
+        
         
         self.ref.observe(.value) { snapshot in
             var newRooms = [Room]()
@@ -45,12 +46,10 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let snapshot = child as? DataSnapshot,
                     let room = Room(snapshot: snapshot) {
                     newRooms.append(room)
-                    
                 }
-                
             }
-            self.rooms = newRooms
-            self.myTableView.reloadData()
+            self.tableViewDelegate?.update(withRooms: newRooms)
+            self.roomsTableView.reloadData()
         }
         ImageCache().loadImage(fromUrlString: self.user?.imageUrl) { success, image in
             guard success else { return }
@@ -70,21 +69,21 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.view.addSubview(UIView(frame: .zero))
         
-        self.view.addSubview(myTableView)
+        self.view.addSubview(roomsTableView)
         
         self.profileImageView.layer.cornerRadius = 15
         
         self.profileImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         self.profileImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        myTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        myTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        myTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        myTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        roomsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        roomsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        roomsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        roomsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     @objc private func handleProfileAction() {
-        
+        //TODO: ADD PROFILE SCREEN
     }
     
     @objc private func handleNewRoomAction() {
@@ -114,7 +113,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    private func addUserToRoom(room:Room) {
+    private func addUser(toRoom room: Room) {
         let listRef = room.ref?.child("users")
         let newListRef = listRef?.childByAutoId()
         newListRef?.setValue(self.user?.toAnyObject())
@@ -122,29 +121,8 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.transitionToVote(withRoomId: room.id, isHost: self.user?.userName == room.ownerUserName, hostName: room.ownerUserName, roomRef: room.ref)
     }
     
-    //MARK:TABLEVIEW DELEGATES
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.addUserToRoom(room: rooms[indexPath.row])
-        
-        
+    func didSelectRow(_ withDataItem: Room){
+        self.addUser(toRoom: withDataItem)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rooms.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Content.roomCellIdentifier, for: indexPath as IndexPath) as! RoomTableViewCell
-        cell.titleLabel.text = "\(rooms[indexPath.row].ownerUserName)'s Trap"
-        ImageCache().loadImage(fromUrlString: rooms[indexPath.row].imageUrl) { success, image in
-            guard success else { return }
-            cell.imgView.image = image
-        }
-        return cell
-    }
 }

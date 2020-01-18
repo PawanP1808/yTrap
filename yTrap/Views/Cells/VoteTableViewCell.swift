@@ -11,6 +11,8 @@ import UIKit
 
 class VoteTableViewCell: UITableViewCell {
     
+    var delegate: VoteDelegate?
+    
     lazy var imgView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,6 +32,7 @@ class VoteTableViewCell: UITableViewCell {
     
     lazy var upVote: UIImageView = {
         let imgView = UIImageView()
+        imgView.tag = 0
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.backgroundColor = UIColor.clear
         imgView.image = Constants.Design.Image.up
@@ -38,6 +41,7 @@ class VoteTableViewCell: UITableViewCell {
     
     lazy var downVote: UIImageView = {
         let imgView = UIImageView()
+        imgView.tag = 1
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.backgroundColor = UIColor.clear
         imgView.image = Constants.Design.Image.down
@@ -97,23 +101,38 @@ class VoteTableViewCell: UITableViewCell {
         
     }
     
-    func setup(tag: Int, song: Song, target: VoteViewController) {
+    func setup(tag: Int, song: Song) {
         self.titleLabel.text = song.title
         self.votelbl.text = "\(song.votes)"
+        self.tag = tag
         ImageCache().loadImage(fromUrlString: song.image) { success, image in
             guard success else { return }
             self.imgView.image = image
         }
-        self.addGestures(tag: tag,target: target)
+        self.addGestures(tag: tag)
     }
     
-    private func addGestures(tag:Int,target:VoteViewController){
+    @objc func handleVote(_ sender:AnyObject) {
+        guard let canUpdate = self.delegate?.canUpdate(forIndex: self.tag), canUpdate else { return }
+        let voteIndex = sender.view.tag
+        if(voteIndex == 1) {
+            //downvote
+            self.votelbl.text = "\(Int(self.votelbl.text!)! - 1)"
+            self.delegate?.vote(withIndex: self.tag, vote: .down)
+            
+        } else {
+            //upvote
+            self.votelbl.text = "\(Int(self.votelbl.text!)! + 1)"
+            self.delegate?.vote(withIndex: self.tag, vote: .up)
+        }
+        
+    }
+    
+    private func addGestures(tag:Int){
         self.upVote.isUserInteractionEnabled = true
         self.downVote.isUserInteractionEnabled = true
-        self.upVote.tag = tag
-        self.downVote.tag = tag
-        let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: target, action: #selector(VoteViewController.upVoted(_:)))
-        let tappedDownVote:UITapGestureRecognizer = UITapGestureRecognizer(target: target, action: #selector(VoteViewController.downVoted(_:)))
+        let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleVote(_:)))
+        let tappedDownVote:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleVote(_:)))
         tapped.numberOfTapsRequired = 1
         tappedDownVote.numberOfTapsRequired = 1
         self.upVote.addGestureRecognizer(tapped)

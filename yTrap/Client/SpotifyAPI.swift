@@ -44,7 +44,6 @@ class SpotifyAPI {
     
     func getRecentTracks(completionArray: @escaping (_ success: Bool, _ songs: [Song]) -> ()) {
         Alamofire.request(Constants.API.Spotify.recentsUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: getHeaders()).responseJSON { (dataResponse) in
-            
             if let result = dataResponse.result.value, let data = result as? [String:AnyObject], let items = data["items"] as? [[String:AnyObject]], dataResponse.response?.statusCode == 200 {
                 var trackArray: [Song] = []
                 for item in items {
@@ -58,7 +57,6 @@ class SpotifyAPI {
     }
     
     func playlistTracks(ownerID: String, playlistID: String, completionArray: @escaping ([Song]) -> ()) {
-
         Alamofire.request(Constants.API.Spotify.songsForPlaylistUrl +  "\(ownerID)/playlists/\(playlistID)/tracks", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: getHeaders()).responseJSON { (dataResponse) in
             if dataResponse.response?.statusCode == 200,
                 let result = dataResponse.result.value,
