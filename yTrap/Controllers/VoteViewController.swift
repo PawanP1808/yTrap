@@ -108,6 +108,5 @@ class VoteViewController: UIViewController, VoteDelegate {
         }
         self.alreadyVoted.append(voteSong)
         self.updateVotes(forSong: voteSong)
-        
     }
 }

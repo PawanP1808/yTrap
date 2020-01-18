@@ -111,7 +111,7 @@
 		8756421123CA8EDE003551B0 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		8756421523CA9872003551B0 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		8756421723CAB2AA003551B0 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
-		8757305E23CCEBBD0021387E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8757305E23CCEBBD0021387E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87B4188223CBE67E00CB3640 /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		87B4188423CBE90900CB3640 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		87B4188623CBF38100CB3640 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
@@ -203,21 +203,15 @@
 		8748F60723C78FB100A4A7A1 /* yTrap */ = {
 			isa = PBXGroup;
 			children = (
+				8748F61623C78FB200A4A7A1 /* Info.plist */,
+				876ABE2B23D392BD005E7624 /* Utils */,
 				8756420923CA6D9E003551B0 /* Models */,
 				874CBD3523C911D7002A5D73 /* DataStore */,
 				874CBD3223C90706002A5D73 /* Client */,
 				874B59AF23C7B88C00A48A90 /* Constants */,
 				8748F63923C7909900A4A7A1 /* Views */,
 				8748F63823C7908F00A4A7A1 /* Controllers */,
-				8748F60823C78FB100A4A7A1 /* AppDelegate.swift */,
-				8748F60A23C78FB100A4A7A1 /* SceneDelegate.swift */,
 				8748F61E23C78FB200A4A7A1 /* yTrapTests */,
-				8748F61123C78FB200A4A7A1 /* Assets.xcassets */,
-				8748F61323C78FB200A4A7A1 /* LaunchScreen.storyboard */,
-				8748F61623C78FB200A4A7A1 /* Info.plist */,
-				8757305E23CCEBBD0021387E /* GoogleService-Info.plist */,
-				874CBD4023C91B75002A5D73 /* yTrap-Bridging-Header.h */,
-				874FBBAC23D157A7008135C5 /* Register.swift */,
 			);
 			path = yTrap;
 			sourceTree = "<group>";
@@ -256,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				874FBBA923D1522F008135C5 /* TableView */,
-				8751542523D105DF0084985A /* Cells */,
 				874A4F3A23D2433000D352C8 /* PlayerView.swift */,
 			);
 			path = Views;
@@ -291,6 +284,7 @@
 		874FBBA923D1522F008135C5 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				8751542523D105DF0084985A /* Cells */,
 				874FBBAE23D15949008135C5 /* Delegates */,
 				874FBBAA23D15313008135C5 /* TableView.swift */,
 			);
@@ -330,6 +324,20 @@
 				87B4188423CBE90900CB3640 /* Playlist.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		876ABE2B23D392BD005E7624 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				874CBD4023C91B75002A5D73 /* yTrap-Bridging-Header.h */,
+				874FBBAC23D157A7008135C5 /* Register.swift */,
+				8748F60823C78FB100A4A7A1 /* AppDelegate.swift */,
+				8748F60A23C78FB100A4A7A1 /* SceneDelegate.swift */,
+				8748F61123C78FB200A4A7A1 /* Assets.xcassets */,
+				8748F61323C78FB200A4A7A1 /* LaunchScreen.storyboard */,
+				8757305E23CCEBBD0021387E /* GoogleService-Info.plist */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -786,7 +794,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pawan.SocialMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "./yTrap/yTrap-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "./yTrap/Utils/yTrap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -818,7 +826,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pawan.SocialMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "./yTrap/yTrap-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "./yTrap/Utils/yTrap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
