@@ -10,7 +10,7 @@
 ## Requirements
 
 - iOS 10.0+
-- Xcode 11.3
+- Xcode 10.3
 
 ## Installation
 
