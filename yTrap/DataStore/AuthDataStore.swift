@@ -21,30 +21,30 @@ class AuthDataStore {
         self.userDefaults = userDefaults
     }
     // MARK: - API
-    func storeAccessInfo(accessToken:String, refreshToken:String,expireHour:Int){
+    func storeAccessInfo(accessToken:String, refreshToken:String,expireHour:String){
         saveValue(forKey: .accessToken, value: accessToken, userID: "accessToken")
         saveValue(forKey: .refreshToken, value: refreshToken, userID: "refreshToken")
         saveValue(forKey: .expireHour, value: expireHour, userID: "expireHour")
     }
     
-    func getAccessInfo()->(String?, String?, Int?){
+    func getAccessInfo()->(String?, String?, String?){
         let accessToken:String? = readValue(forKey: .accessToken, userID: "accessToken")
         let refreshToken:String? = readValue(forKey: .refreshToken, userID: "refreshToken")
-        let expireTime:Int? = readValue(forKey: .expireHour, userID: "expireHour")
+        let expireTime:String? = readValue(forKey: .expireHour, userID: "expireHour")
         return (accessToken,refreshToken,expireTime)
     }
     
-    func storeUserData(forUser user:User,userName:String){
+    func storeUserData(forUser user:User){
         let encoder = JSONEncoder()
         if let encodedUserData = try? encoder.encode(user) {
-            saveValue(forKey: .userData, value: encodedUserData, userID: userName)
+            saveValue(forKey: .userData, value: encodedUserData, userID: "userData")
         }
     }
     
-    func getUserData(userName:String)->(User?){
+    func getUserData()->(User?){
       
         let decoder = JSONDecoder()
-        if  let userData = readObject(forKey: .userData, userID: userName),
+        if  let userData = readObject(forKey: .userData, userID: "userData"),
             let loadedPerson = try? decoder.decode(User.self, from: userData) {
             return loadedPerson
         }

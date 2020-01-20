@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User:Codable {
+struct User: Codable {
     var imageUrl:String
     var userName:String
     var isPremium:Bool
@@ -20,8 +20,7 @@ struct User:Codable {
     }
     
     init(withData user:SPTUser){
-        
-        self.imageUrl = "https://i.ytimg.com/vi/EgRCa_zuM1I/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCyaXDje504Q9cguQPBJKFOa7XTwQ"
+        self.imageUrl = Constants.API.defaultImageString
         if user.images.count != 0 {
             if user.largestImage.imageURL != nil, let largestImageUrl = user.largestImage.imageURL {
                 self.imageUrl = "\(largestImageUrl)"
@@ -29,6 +28,12 @@ struct User:Codable {
         }
         self.userName = user.canonicalUserName
         self.isPremium = user.product == SPTProduct.premium
-        
+    }
+    
+    func toAnyObject() -> [String:Any] {
+        return ["image":self.imageUrl,
+                "userName": self.userName,
+                "isPremium":self.isPremium
+        ]
     }
 }
