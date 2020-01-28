@@ -50,8 +50,7 @@ class PlaylistViewController: UIViewController {
         self.setupView()
         getUserPlaylistAndRecent()
     }
-    
-    
+
     private func setupView() {
         self.view.addSubview(UIView(frame: .zero))
         

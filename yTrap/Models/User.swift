@@ -9,6 +9,7 @@
 import Foundation
 
 struct User: Codable {
+    
     var imageUrl:String
     var userName:String
     var isPremium:Bool

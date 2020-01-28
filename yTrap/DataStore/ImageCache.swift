@@ -31,13 +31,11 @@ class ImageCache {
     
     func loadImage(fromUrlString image:String?, callback: @escaping ((_ success: Bool, _ image:UIImage?) -> ())){
         guard let imageUrl = image else { return }
-        if let dict = UserDefaults.standard.object(forKey: "ImageCache") as? [String:String] {
-            if let path = dict[imageUrl] {
-                if let data = try? Data(contentsOf: URL(fileURLWithPath: path)){
-                    let img = UIImage(data: data)
-                    callback(true, img)
-                }
-            }
+        if let dict = UserDefaults.standard.object(forKey: "ImageCache") as? [String:String],
+            let path = dict[imageUrl],
+            let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+            let img = UIImage(data: data)
+            callback(true, img)
         }
         Alamofire.request(imageUrl).responseImage { response in
             if let image = response.result.value {

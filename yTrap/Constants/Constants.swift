@@ -19,7 +19,6 @@ struct Constants {
                 static let white = UIColor.white
                 static let black = UIColor.black
                 static let main =  UIColor.black
-//
             }
             struct Secondary {
                 

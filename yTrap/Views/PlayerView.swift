@@ -78,37 +78,6 @@ class PlayerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func skip() {
-        self.delegate?.skip()
-    }
-    
-    @objc func playPause() {
-        self.delegate?.playPause()
-    }
-    
-    func set(isPlaying playing: Bool) {
-        if(playing){
-            self.playPauseImg.image = Constants.Design.Image.pause?.withRenderingMode(.alwaysTemplate)
-        } else {
-            self.playPauseImg.image = Constants.Design.Image.play?.withRenderingMode(.alwaysTemplate)
-        }
-        self.playPauseImg.tintColor = .white
-    }
-    
-    func updateProgressBar(with value: Float) {
-        self.progressBar.progress = value
-    }
-    
-    func setNowPlaying(withSong song: Song) {
-        self.titleLabel.text = song.title
-        self.artistLabel.text = song.artist
-        
-        ImageCache().loadImage(fromUrlString: song.image) {success, image in
-            guard success else { return }
-            self.imgView.image = image
-        }
-    }
-    
     private func setupView() {
         self.backgroundColor = Constants.Design.Color.Primary.main
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -152,6 +121,39 @@ class PlayerView: UIView {
         skipImg.widthAnchor.constraint(equalToConstant: 30).isActive = true
         skipImg.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 40).isActive = true
         skipImg.topAnchor.constraint(equalTo: artistLabel.bottomAnchor, constant: 8).isActive = true
+    }
+    
+    //MARK-- EXTERNALLY ADDRESSABLE METHODS UDED IN CONTROLLER
+    
+    @objc func skip() {
+        self.delegate?.skip()
+    }
+    
+    @objc func playPause() {
+        self.delegate?.playPause()
+    }
+    
+    func set(isPlaying playing: Bool) {
+        if(playing){
+            self.playPauseImg.image = Constants.Design.Image.pause?.withRenderingMode(.alwaysTemplate)
+        } else {
+            self.playPauseImg.image = Constants.Design.Image.play?.withRenderingMode(.alwaysTemplate)
+        }
+        self.playPauseImg.tintColor = .white
+    }
+    
+    func updateProgressBar(with value: Float) {
+        self.progressBar.progress = value
+    }
+    
+    func setNowPlaying(withSong song: Song) {
+        self.titleLabel.text = song.title
+        self.artistLabel.text = song.artist
+        
+        ImageCache().loadImage(fromUrlString: song.image) {success, image in
+            guard success else { return }
+            self.imgView.image = image
+        }
     }
     
 }

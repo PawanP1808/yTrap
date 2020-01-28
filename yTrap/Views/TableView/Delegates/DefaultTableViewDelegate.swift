@@ -14,10 +14,6 @@ class DefaultTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSo
     private var data = ["Playlists","Recently Played"]
     var didSelectRow: ((_ item: Int) -> Void)?
     
-    override init() {
-        
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let didSelectRow = didSelectRow {
             didSelectRow(indexPath.row)

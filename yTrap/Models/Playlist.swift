@@ -28,7 +28,6 @@ struct Playlist: Codable {
         self.ownerID = owner["id"] as! String
         self.image = images.first?["url"] as! String
         self.total = tracks["total"] as! Int
-        
     }
 }
 

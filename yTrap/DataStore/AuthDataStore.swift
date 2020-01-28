@@ -16,17 +16,17 @@ class AuthDataStore {
         }
     }
     let userDefaults: UserDefaults
-    // MARK: - Lifecycle
+
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
     }
-    // MARK: - API
+
     func storeAccessInfo(accessToken:String, refreshToken:String,expireHour:String){
         saveValue(forKey: .accessToken, value: accessToken, userID: "accessToken")
         saveValue(forKey: .refreshToken, value: refreshToken, userID: "refreshToken")
         saveValue(forKey: .expireHour, value: expireHour, userID: "expireHour")
     }
-    
+
     func getAccessInfo()->(String?, String?, String?){
         let accessToken:String? = readValue(forKey: .accessToken, userID: "accessToken")
         let refreshToken:String? = readValue(forKey: .refreshToken, userID: "refreshToken")
@@ -42,7 +42,6 @@ class AuthDataStore {
     }
     
     func getUserData()->(User?){
-      
         let decoder = JSONDecoder()
         if  let userData = readObject(forKey: .userData, userID: "userData"),
             let loadedPerson = try? decoder.decode(User.self, from: userData) {
@@ -59,6 +58,7 @@ class AuthDataStore {
                 userDefaults.removeObject(forKey: key)
         }
     }
+    
     // MARK: - Private
     private func saveValue(forKey key: Key, value: Any, userID: String) {
         userDefaults.set(value, forKey: key.make(for: userID))

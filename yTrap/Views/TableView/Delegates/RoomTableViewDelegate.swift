@@ -40,11 +40,8 @@ class RoomTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Content.roomCellIdentifier, for: indexPath as IndexPath) as! RoomTableViewCell
-        cell.titleLabel.text = "\(data[indexPath.row].ownerUserName)'s Trap"
-        ImageCache().loadImage(fromUrlString: data[indexPath.row].imageUrl) { success, image in
-            guard success else { return }
-            cell.imgView.image = image
-        }
+        let selectedRoom = data[indexPath.row]
+        cell.setup(withRoom: selectedRoom)
         return cell
     }
     

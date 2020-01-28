@@ -84,7 +84,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }
     
     private func setupView() {
-        view.backgroundColor = Constants.Design.Color.Primary.white
+        view.backgroundColor = Constants.Design.Color.Primary.black
         view.addSubview(loginButton)
         view.addSubview(logoImageView)
         

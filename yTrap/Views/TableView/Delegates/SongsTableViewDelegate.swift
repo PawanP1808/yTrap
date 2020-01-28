@@ -15,7 +15,6 @@ class SongsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSour
     
     init(withSongs data: [Song]) {
         self.data = data
-        
     }
     
     func update(withSongs data : [Song]) {
@@ -43,5 +42,4 @@ class SongsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSour
         cell.setup(withSong: selectedSong)
         return cell
     }
-
 }

@@ -11,18 +11,6 @@ import Firebase
 import AVKit
 import MediaPlayer
 
-protocol ManageServerCommandsProtocol: class {
-    func playAudio(withSong: Song)
-    func isPlaying() -> Bool
-    func isRoomHost() -> Bool 
-}
-
-protocol PlayerDelegateProtocol: class {
-    func playPause()
-    func skip()
-    
-}
-
 class PlayerViewController: UIViewController, ManageServerCommandsProtocol, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate,PlayerDelegateProtocol {
     
     var roomId: Int?
@@ -100,9 +88,7 @@ class PlayerViewController: UIViewController, ManageServerCommandsProtocol, SPTA
             return .success
         }
     }
-    
-    
-    
+
     private func setupView(){
         self.title = String(describing: self.hostName!) + "'s trap"
         self.view.backgroundColor = Constants.Design.Color.Primary.main

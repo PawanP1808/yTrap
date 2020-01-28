@@ -11,17 +11,25 @@ import UIKit
 
 class SongTableViewCell: UITableViewCell {
     
-    lazy var imgView: UIImageView = {
+    private lazy var imgView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.backgroundColor = UIColor.lightGray
         return imgView
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.adjustsFontSizeToFitWidth = true
+        lbl.backgroundColor = UIColor.clear
+        lbl.textColor = .white
+        lbl.font = Constants.Design.Font.cellTitleTxt
+        return lbl
+    }()
+    private lazy var artistLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.backgroundColor = UIColor.clear
         lbl.textColor = .white
         lbl.font = Constants.Design.Font.cellTitleTxt
@@ -40,6 +48,7 @@ class SongTableViewCell: UITableViewCell {
         
         contentView.addSubview(imgView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(artistLabel)
         
         imgView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         imgView.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -50,10 +59,16 @@ class SongTableViewCell: UITableViewCell {
         titleLabel.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 20).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         titleLabel.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        
+        artistLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        artistLabel.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 20).isActive = true
+        artistLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        artistLabel.widthAnchor.constraint(equalToConstant: 250).isActive = true
     }
     
     func setup(withSong song: Song) {
         self.titleLabel.text = song.title
+        self.artistLabel.text = song.artist
         ImageCache().loadImage(fromUrlString: song.image) {success, image in
             guard success else { return }
             self.imgView.image = image

@@ -13,14 +13,14 @@ class VoteTableViewCell: UITableViewCell {
     
     var delegate: VoteDelegate?
     
-    lazy var imgView: UIImageView = {
+    private lazy var imgView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.backgroundColor = UIColor.lightGray
         return imgView
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.adjustsFontSizeToFitWidth = true
@@ -30,7 +30,7 @@ class VoteTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    lazy var upVote: UIImageView = {
+    private lazy var upVote: UIImageView = {
         let imgView = UIImageView()
         imgView.tag = 0
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ class VoteTableViewCell: UITableViewCell {
         return imgView
     }()
     
-    lazy var downVote: UIImageView = {
+    private lazy var downVote: UIImageView = {
         let imgView = UIImageView()
         imgView.tag = 1
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ class VoteTableViewCell: UITableViewCell {
         return imgView
     }()
     
-    lazy var votelbl: UILabel = {
+    private lazy var votelbl: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.backgroundColor = UIColor.clear
@@ -119,13 +119,11 @@ class VoteTableViewCell: UITableViewCell {
             //downvote
             self.votelbl.text = "\(Int(self.votelbl.text!)! - 1)"
             self.delegate?.vote(withIndex: self.tag, vote: .down)
-            
         } else {
             //upvote
             self.votelbl.text = "\(Int(self.votelbl.text!)! + 1)"
             self.delegate?.vote(withIndex: self.tag, vote: .up)
         }
-        
     }
     
     private func addGestures(tag:Int){

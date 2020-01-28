@@ -13,14 +13,12 @@ class TableView: UITableView {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: .zero, style: .plain)
         self.setupView()
-        
     }
-    
+
     convenience init(registerCells: [Register]) {
         self.init(frame: .zero, style: .plain)
         self.setupView()
         self.registerCells(withRegisters: registerCells)
-        
     }
 
     required init?(coder: NSCoder) {
@@ -31,7 +29,6 @@ class TableView: UITableView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = Constants.Design.Color.Primary.main
         self.tableFooterView = UIView(frame: .zero)
-        
     }
     
     private func registerCells(withRegisters registers: [Register]) {

@@ -11,14 +11,14 @@ import UIKit
 
 class RoomTableViewCell: UITableViewCell {
     
-    lazy var imgView: UIImageView = {
+    private lazy var imgView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.backgroundColor = UIColor.lightGray
         return imgView
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.adjustsFontSizeToFitWidth = true
@@ -51,9 +51,14 @@ class RoomTableViewCell: UITableViewCell {
         titleLabel.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 20).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         titleLabel.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        
-        
-        
+    }
+    
+    func setup(withRoom room: Room){
+        self.titleLabel.text = "\(room.ownerUserName)'s Trap"
+        ImageCache().loadImage(fromUrlString: room.imageUrl) { success, image in
+            guard success else { return }
+            self.imgView.image = image
+        }
     }
     
     required init?(coder: NSCoder) {

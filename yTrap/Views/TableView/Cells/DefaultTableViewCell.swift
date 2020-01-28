@@ -11,7 +11,7 @@ import UIKit
 
 class DefaultTableViewCell: UITableViewCell {
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.adjustsFontSizeToFitWidth = true

@@ -15,7 +15,6 @@ class PlaylistTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataS
     
     init(withPlaylists data: [Playlist]) {
         self.data = data
-        
     }
     
     func update(withPlaylists data : [Playlist]) {

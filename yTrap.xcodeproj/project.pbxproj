@@ -31,6 +31,7 @@
 		874D676423CBB31D00A7CFE4 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D676323CBB31D00A7CFE4 /* PlayerViewController.swift */; };
 		874D676623CBC1C900A7CFE4 /* VoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D676523CBC1C900A7CFE4 /* VoteTableViewCell.swift */; };
 		874D676823CBCC7A00A7CFE4 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D676723CBCC7A00A7CFE4 /* Song.swift */; };
+		874F4BCD23E097E20000CB13 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F4BCC23E097E20000CB13 /* Protocols.swift */; };
 		874FBBAB23D15313008135C5 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FBBAA23D15313008135C5 /* TableView.swift */; };
 		874FBBAD23D157A7008135C5 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FBBAC23D157A7008135C5 /* Register.swift */; };
 		874FBBB023D15965008135C5 /* RoomTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FBBAF23D15965008135C5 /* RoomTableViewDelegate.swift */; };
@@ -103,6 +104,7 @@
 		874D676323CBB31D00A7CFE4 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		874D676523CBC1C900A7CFE4 /* VoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteTableViewCell.swift; sourceTree = "<group>"; };
 		874D676723CBCC7A00A7CFE4 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		874F4BCC23E097E20000CB13 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		874FBBAA23D15313008135C5 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		874FBBAC23D157A7008135C5 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		874FBBAF23D15965008135C5 /* RoomTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewDelegate.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				8748F61123C78FB200A4A7A1 /* Assets.xcassets */,
 				8748F61323C78FB200A4A7A1 /* LaunchScreen.storyboard */,
 				8757305E23CCEBBD0021387E /* GoogleService-Info.plist */,
+				874F4BCC23E097E20000CB13 /* Protocols.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				874FBBAB23D15313008135C5 /* TableView.swift in Sources */,
 				874FBBAD23D157A7008135C5 /* Register.swift in Sources */,
 				87B4188B23CBF3F600CB3640 /* SongTableViewCell.swift in Sources */,
+				874F4BCD23E097E20000CB13 /* Protocols.swift in Sources */,
 				8756421223CA8EDE003551B0 /* RoomViewController.swift in Sources */,
 				8748F60923C78FB100A4A7A1 /* AppDelegate.swift in Sources */,
 				8748F60B23C78FB100A4A7A1 /* SceneDelegate.swift in Sources */,

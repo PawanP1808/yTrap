@@ -24,7 +24,6 @@ struct Song {
     var ref:DatabaseReference?
     
     init?(snapshot: DataSnapshot) {
-        
         guard let snapshotDict = snapshot.value as? [String:Any],
             let songUri = snapshotDict["uri"] as? String,
             let artist = snapshotDict["artist"] as? String,
@@ -35,7 +34,7 @@ struct Song {
             let image = snapshotDict["image"] as? String,
             let votes = snapshotDict["votes"] as? Int,
             let title = snapshotDict["title"] as? String else { return nil }
-        
+
         self.key = snapshot.key
         self.ref = snapshot.ref
         self.artist = artist
@@ -47,7 +46,6 @@ struct Song {
         self.image = image
         self.votes = votes
         self.title = title
-        
     }
     
     init(trackDict: [String:AnyObject]) {
@@ -98,8 +96,5 @@ struct Song {
                  "image":self.image,
                  "votes":self.votes,
         ]
-        
     }
-    
 }
-
