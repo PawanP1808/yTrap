@@ -1,5 +1,5 @@
 //
-//  PlaylistViewController.swift
+//  SongSelectionViewController.swift
 //  yTrap
 //
 //  Created by Pawan on 2020-01-12.
@@ -16,7 +16,7 @@ enum Table {
     case search
 }
 
-class PlaylistViewController: UIViewController {
+class SongSelectionViewController: UIViewController {
     
     var roomId: Int?
     var ref:DatabaseReference?
@@ -27,6 +27,7 @@ class PlaylistViewController: UIViewController {
     private var defaultTableViewDelegate: DefaultTableViewDelegate?
     private var songsTableViewDelegate: SongsTableViewDelegate?
     private var playlistTableViewDelegate: PlaylistTableViewDelegate?
+    private var spinner: UIActivityIndicatorView?
     
     private lazy var tableView: TableView = {
         var registerCell = [Register]()
@@ -63,14 +64,16 @@ class PlaylistViewController: UIViewController {
     }
     
     private func getUserPlaylistAndRecent(){
+        self.spinner = self.showSpinner(view: self.tableView)
         SpotifyAPI().getCurrentUserPlaylists() { success,playlists in
             guard success else { return }
             self.playlists = playlists
-            SpotifyAPI().getRecentTracks() { success, recents in
-                guard success else { return }
-                self.recents = recents
-                self.oldRecents = recents
-                self.tableView.reloadData()
+            SpotifyAPI().getRecentTracks() { [weak self] success, recents in
+                guard success ,let sSelf = self else { return }
+                sSelf.recents = recents
+                sSelf.oldRecents = recents
+                sSelf.reload(tableView: sSelf.tableView)
+                sSelf.hideModalSpinner(indicator: sSelf.spinner!, view: sSelf.tableView)
             }
         }
     }
@@ -87,12 +90,12 @@ class PlaylistViewController: UIViewController {
             self.tableView.delegate = self.songsTableViewDelegate
             self.tableView.dataSource = self.songsTableViewDelegate
         case .search:
-            print("search")
+            NSLog("search")
         }
-        self.tableView.reloadData()
+        self.reload(tableView: self.tableView)
     }
     
-    func didSelectDefaultRow(_ item: Int){
+    private func didSelectDefaultRow(_ item: Int){
         if item == 0 {
             self.playlistTableViewDelegate?.update(withPlaylists: self.playlists!)
             self.switchTo(table: .playlist)
@@ -103,19 +106,22 @@ class PlaylistViewController: UIViewController {
         }
     }
     
-    func didSelectSongRow(_ item: Song){
+    private func didSelectSongRow(_ item: Song){
         let voteRef = self.ref?.child("Vote")
         let newVoteRef = voteRef?.childByAutoId()
         newVoteRef?.setValue(item.toAnyObject())
         self.dismiss(animated: true)
     }
     
-    func didSelectPlaylistRow(_ item: Playlist){
-        SpotifyAPI().playlistTracks(ownerID: item.ownerID, playlistID: item.playlistID) { tracks in
-            self.tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
-            self.recents = tracks
-            self.songsTableViewDelegate?.update(withSongs: self.recents!)
-            self.switchTo(table: .recent)
+    private func didSelectPlaylistRow(_ item: Playlist){
+         self.spinner = self.showSpinner(view: self.tableView)
+        SpotifyAPI().playlistTracks(ownerID: item.ownerID, playlistID: item.playlistID) { [weak self] tracks in
+            guard let sSelf = self else { return }
+            sSelf.tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
+            sSelf.recents = tracks
+            sSelf.songsTableViewDelegate?.update(withSongs: sSelf.recents!)
+            sSelf.hideModalSpinner(indicator: sSelf.spinner!, view: sSelf.tableView)
+            sSelf.switchTo(table: .recent)
         }
     }
 }

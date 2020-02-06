@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }()
     
     @objc func handleLoginAction(){
-        print("login pressed")
+        NSLog("login pressed")
         self.safariVC = SFSafariViewController(url: Constants.API.Spotify.loginUrl!)
         self.safariVC?.delegate = self
         guard let safariViewController = self.safariVC else { return }
@@ -46,19 +46,19 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
         self.safariVC?.dismiss(animated: true, completion: nil)
         if let userInfo = notification.userInfo as? [String:String],
             let authCode = userInfo["auth_code"] {
-            AuthAPI().getAuthCode(authToken: authCode) { accessToken,refreshToken,expireTime in
+            AuthAPI().getAuthCode(authToken: authCode) { [weak self] accessToken,refreshToken,expireTime in
                 AuthDataStore().storeAccessInfo(accessToken: accessToken, refreshToken: refreshToken, expireHour: expireTime)
-                self.getUserInfo(token: accessToken)
+                self?.getUserInfo(token: accessToken)
             }
         }
     }
     
     private func getUserInfo(token:String){
-        SpotifyAPI().getUserData(authToken: token){ success,userData in
+        SpotifyAPI().getUserData(authToken: token){ [weak self] success,userData in
             guard  success else { return }
             let user = User(withData: userData!)
             AuthDataStore().storeUserData(forUser: user)
-            self.transitionToRooms()
+            self?.transitionToRooms()
             //TODO: ADD USER TO FIREBASE FOR STATS
         }
     }

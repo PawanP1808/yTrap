@@ -52,7 +52,7 @@ class PlayerView: UIView {
         imgView.isUserInteractionEnabled = true
         imgView.image = Constants.Design.Image.pause?.withRenderingMode(.alwaysTemplate)
         imgView.tintColor = .white
-        
+        imgView.isHidden = true
         imgView.addGestureRecognizer(tap)
         return imgView
     }()
@@ -65,6 +65,7 @@ class PlayerView: UIView {
         imgView.isUserInteractionEnabled = true
         imgView.image = Constants.Design.Image.skip?.withRenderingMode(.alwaysTemplate)
         imgView.tintColor = .white
+        imgView.isHidden = true
         imgView.addGestureRecognizer(tap)
         return imgView
     }()
@@ -123,7 +124,7 @@ class PlayerView: UIView {
         skipImg.topAnchor.constraint(equalTo: artistLabel.bottomAnchor, constant: 8).isActive = true
     }
     
-    //MARK-- EXTERNALLY ADDRESSABLE METHODS UDED IN CONTROLLER
+    //MARK-- EXTERNALLY ADDRESSABLE METHODS USED IN CONTROLLER
     
     @objc func skip() {
         self.delegate?.skip()
@@ -131,6 +132,11 @@ class PlayerView: UIView {
     
     @objc func playPause() {
         self.delegate?.playPause()
+    }
+    
+    func toggleControls(show: Bool){
+        self.playPauseImg.isHidden = !show
+        self.skipImg.isHidden = !show
     }
     
     func set(isPlaying playing: Bool) {

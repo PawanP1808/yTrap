@@ -40,8 +40,16 @@ class PlayerViewController: UIViewController, ManageServerCommandsProtocol, SPTA
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let uwHost = isHost, !uwHost {
+            self.ref?.child("NowPlaying").observe(.value) { [weak self] snapshot in
+                if let song = Song(snapshot:snapshot) {
+                    self?.setNowPlaying(withSong: song)
+                }
+            }
+        }
         self.setupView()
         self.initializePlayer()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,23 +138,28 @@ class PlayerViewController: UIViewController, ManageServerCommandsProtocol, SPTA
     }
     
     private func setNowPlaying(withSong song: Song) {
-        self.playerView.isHidden = false 
-        self.setInfoCenter(withSong: song, position: "0")
+        if let uwIsHost = isHost, uwIsHost {
+            let songRef = self.ref?.child("NowPlaying")
+            songRef?.setValue(song.toAnyObject())
+            self.setInfoCenter(withSong: song, position: "0")
+            self.playerView.toggleControls(show: true)
+        }
+        self.playerView.isHidden = false
         self.songNow = song
         self.playerView.setNowPlaying(withSong: song)
     }
     
     @objc private func handlePlaylistAction() {
-        let playlistViewController = PlaylistViewController()
-        playlistViewController.roomId = self.roomId
-        playlistViewController.ref = self.ref
-        self.navigationController?.present(playlistViewController, animated: true)
+        let songSelectionViewController = SongSelectionViewController()
+        songSelectionViewController.roomId = self.roomId
+        songSelectionViewController.ref = self.ref
+        self.navigationController?.present(songSelectionViewController, animated: false)
     }
     
     private func setInfoCenter(withSong song: Song, position: String ) {
-        ImageCache().loadImage(fromUrlString: song.image) {success, image in
+        ImageCache().loadImage(fromUrlString: song.image) { [weak self] success, image in
             guard success,let image = image else { return }
-            self.nowPlayingCenter.nowPlayingInfo = [
+            self?.nowPlayingCenter.nowPlayingInfo = [
                 MPMediaItemPropertyTitle: song.title,
                 MPMediaItemPropertyAlbumTitle: "Album",
                 MPMediaItemPropertyArtist: song.artist,
@@ -200,12 +213,12 @@ class PlayerViewController: UIViewController, ManageServerCommandsProtocol, SPTA
                 UIApplication.shared.beginReceivingRemoteControlEvents()
                 do {
                     try AVAudioSession.sharedInstance().setActive(true)
-                    print("AVAudioSession is Active")
+                    NSLog("AVAudioSession is Active")
                 } catch {
-                    print(error)
+                    NSLog(error)
                 }
             } catch {
-                print(error)
+                NSLog(error)
             }
         })
     }

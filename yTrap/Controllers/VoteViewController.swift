@@ -44,7 +44,8 @@ class VoteViewController: UIViewController, VoteDelegate {
     }
     
     private func getVotes() {
-        self.ref?.child("Vote").observe(.value) { snapshot in
+        self.ref?.child("Vote").observe(.value) { [weak self] snapshot in
+            guard let sSelf = self else { return }
             var newVotes = [Song]()
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot {
@@ -52,13 +53,13 @@ class VoteViewController: UIViewController, VoteDelegate {
                     newVotes.append(song!)
                 }
             }
-            self.votes = newVotes
-            self.tableViewDelegate?.update(withVotes: newVotes)
+            sSelf.votes = newVotes
+            sSelf.tableViewDelegate?.update(withVotes: newVotes)
             
-            if(newVotes.count != 0 && !(self.serverDelegate!.isPlaying()) && self.serverDelegate!.isRoomHost() ){
-                self.serverDelegate?.playAudio(withSong: self.getMostVotedSong()!)
+            if(newVotes.count != 0 && !(sSelf.serverDelegate!.isPlaying()) && sSelf.serverDelegate!.isRoomHost() ){
+                sSelf.serverDelegate?.playAudio(withSong: sSelf.getMostVotedSong()!)
             }
-            self.tableView.reloadData()
+            sSelf.reload(tableView: sSelf.tableView)
         }
     }
     

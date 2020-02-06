@@ -27,6 +27,7 @@ class RoomViewController: UIViewController  {
         iv.image = UIImage(named: "ytrap")
         iv.layer.masksToBounds = true
         iv.isUserInteractionEnabled = true
+        iv.layer.cornerRadius = 15
         iv.addGestureRecognizer(tap)
         return iv
     }()
@@ -40,7 +41,7 @@ class RoomViewController: UIViewController  {
         self.roomsTableView.dataSource = self.tableViewDelegate
         
         
-        self.ref.observe(.value) { snapshot in
+        self.ref.observe(.value) { [weak self] snapshot in
             var newRooms = [Room]()
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot,
@@ -48,12 +49,12 @@ class RoomViewController: UIViewController  {
                     newRooms.append(room)
                 }
             }
-            self.tableViewDelegate?.update(withRooms: newRooms)
-            self.roomsTableView.reloadData()
+            self?.tableViewDelegate?.update(withRooms: newRooms)
+            self?.roomsTableView.reloadData()
         }
-        ImageCache().loadImage(fromUrlString: self.user?.imageUrl) { success, image in
+        ImageCache().loadImage(fromUrlString: self.user?.imageUrl) { [weak self] success, image in
             guard success else { return }
-            self.profileImageView.image = image
+            self?.profileImageView.image = image
         }
         setupView()
     }
@@ -70,8 +71,6 @@ class RoomViewController: UIViewController  {
         self.view.addSubview(UIView(frame: .zero))
         
         self.view.addSubview(roomsTableView)
-        
-        self.profileImageView.layer.cornerRadius = 15
         
         self.profileImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         self.profileImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
